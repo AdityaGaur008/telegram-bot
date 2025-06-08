@@ -8,7 +8,7 @@ async function getUsers(req, res) {
     // Choose one of the following:
 
     // Option 1: Render the view
-    res.render("users", { users });
+    res.render("Users", { users });
 
     // Option 2: Send JSON response
     // res.json(users);
@@ -54,7 +54,7 @@ async function getSettings(req, res) {
   try {
     const settings = await Settings.findOne();
     const openWeatherApiKey = settings ? settings.openWeatherApiKey : "";
-    res.render("settings", { openWeatherApiKey }); // Render the settings.ejs template
+    res.render("Settings", { openWeatherApiKey }); // Render the settings.ejs template
   } catch (error) {
     console.error(error); // Log the error for debugging
     res.status(500).send("Failed to load settings");
