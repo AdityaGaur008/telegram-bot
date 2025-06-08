@@ -1,34 +1,34 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const methodOverride = require("method-override");
-const adminRoutes = require("./routes/admin.route.js");
-const config = require("./config");
-const path = require("path");
+const express = require('express');
+const mongoose = require('mongoose');
+const methodOverride = require('method-override');
+const adminRoutes = require('./routes/admin.route.js');
+const config = require('./config');
+const path = require('path');
+
+// Load the Telegram bot
+require('./bot'); // <== This will start your Telegram bot
 
 const app = express();
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride("_method"));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(methodOverride('_method'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // View engine setup
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'view'));
 
 // Routes
-app.use("/admin", adminRoutes);
-app.get("/dashboard", (req, res) => {
-  res.send("dashboard for testing purpose"); // Render the dashboard view
-});
-mongoose
-  .connect(config.MONGO_URI)
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.error("MongoDB connection error:", err));
+app.use('/admin', adminRoutes);
+
+// Connect DB
+mongoose.connect(config.MONGO_URI)
+  .then(() => console.log('MongoDB connected'))
+  .catch((err) => console.error('MongoDB connection error:', err));
 
 const PORT = process.env.PORT || 3000;
-
 app.listen(PORT, () => {
   console.log(`Admin panel listening on port ${PORT}`);
 });
