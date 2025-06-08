@@ -1,0 +1,13 @@
+body {
+  background: linear-gradient(135deg, #e3e4e8 0%, #e5e4e5 100%);
+  min-height: 100vh;
+}
+
+.btn-hover {
+  transition: all 0.3s ease;
+}
+
+.btn-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
